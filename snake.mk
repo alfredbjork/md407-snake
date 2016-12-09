@@ -5,18 +5,18 @@
 ## Debug
 ProjectName            :=snake
 ConfigurationName      :=Debug
-WorkspacePath          :=Z:/Moplabb2
-ProjectPath            :=Z:/Moplabb2/snake
+WorkspacePath          :=/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb
+ProjectPath            :=/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=alfbjo
-Date                   :=06/12/2016
-CodeLitePath           :=C:/temp/Program/CodeLite
-LinkerName             :=$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-g++.exe
-SharedObjectLinkerName :=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi-g++.exe -shared -fPIC
+User                   :=Alfred Björk
+Date                   :=09/12/2016
+CodeLitePath           :="/Users/Alfred/Library/Application Support/codelite"
+LinkerName             :=/Applications/gcc-arm/bin/arm-none-eabi-g++
+SharedObjectLinkerName :=/Applications/gcc-arm/bin/arm-none-eabi-g++ -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -34,9 +34,7 @@ ArchiveOutputSwitch    :=
 PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="snake.txt"
 PCHCompileFlags        :=
-MakeDirCommand         :=makedir
-RcCmpOptions           := 
-RcCompilerName         :=
+MakeDirCommand         :=mkdir -p
 LinkOptions            :=  -nostartfiles -T$(ProjectPath)/md407-ram.x
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -49,19 +47,19 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)$(CodeLiteDi
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := $(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-ar.exe rcu
-CXX      := $(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-g++.exe
-CC       := $(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-gcc.exe
+AR       := /Applications/gcc-arm/bin/arm-none-eabi-ar rcu
+CXX      := /Applications/gcc-arm/bin/arm-none-eabi-g++
+CC       := /Applications/gcc-arm/bin/arm-none-eabi-gcc
 CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
-CFLAGS   :=  -g -O0 -mthumb -Wall -march=armv6-m -msoft-float -Wa,-adhln=test.s $(Preprocessors)
+CFLAGS   :=  -g -O0 -std=c99 -mthumb -march=armv6-m -msoft-float -Wa,-adhln=test.s $(Preprocessors)
 ASFLAGS  := 
-AS       := $(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-as.exe
+AS       := /Applications/gcc-arm/bin/arm-none-eabi-as
 
 
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=C:\temp\Program\CodeLite
+CodeLiteDir:=/Applications/codelite.app/Contents/SharedSupport/
 Objects0=$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) $(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/logic.c$(ObjectSuffix) $(IntermediateDirectory)/keypad.c$(ObjectSuffix) 
 
 
@@ -86,11 +84,11 @@ PostBuild:
 	@echo Done
 
 MakeIntermediateDirs:
-	@$(MakeDirCommand) "./Debug"
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./Debug"
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 PreBuild:
 
@@ -99,7 +97,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "Z:/Moplabb2/snake/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
 
@@ -107,7 +105,7 @@ $(IntermediateDirectory)/startup.c$(PreprocessSuffix): startup.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/startup.c$(PreprocessSuffix)startup.c
 
 $(IntermediateDirectory)/display.c$(ObjectSuffix): display.c $(IntermediateDirectory)/display.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "Z:/Moplabb2/snake/display.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/display.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake/display.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/display.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/display.c$(DependSuffix): display.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/display.c$(ObjectSuffix) -MF$(IntermediateDirectory)/display.c$(DependSuffix) -MM display.c
 
@@ -115,7 +113,7 @@ $(IntermediateDirectory)/display.c$(PreprocessSuffix): display.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/display.c$(PreprocessSuffix)display.c
 
 $(IntermediateDirectory)/delay.c$(ObjectSuffix): delay.c $(IntermediateDirectory)/delay.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "Z:/Moplabb2/snake/delay.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake/delay.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/delay.c$(DependSuffix): delay.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/delay.c$(ObjectSuffix) -MF$(IntermediateDirectory)/delay.c$(DependSuffix) -MM delay.c
 
@@ -123,7 +121,7 @@ $(IntermediateDirectory)/delay.c$(PreprocessSuffix): delay.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/delay.c$(PreprocessSuffix)delay.c
 
 $(IntermediateDirectory)/logic.c$(ObjectSuffix): logic.c $(IntermediateDirectory)/logic.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "Z:/Moplabb2/snake/logic.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/logic.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake/logic.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/logic.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/logic.c$(DependSuffix): logic.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/logic.c$(ObjectSuffix) -MF$(IntermediateDirectory)/logic.c$(DependSuffix) -MM logic.c
 
@@ -131,7 +129,7 @@ $(IntermediateDirectory)/logic.c$(PreprocessSuffix): logic.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/logic.c$(PreprocessSuffix)logic.c
 
 $(IntermediateDirectory)/keypad.c$(ObjectSuffix): keypad.c $(IntermediateDirectory)/keypad.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "Z:/Moplabb2/snake/keypad.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/keypad.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake/keypad.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/keypad.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/keypad.c$(DependSuffix): keypad.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/keypad.c$(ObjectSuffix) -MF$(IntermediateDirectory)/keypad.c$(DependSuffix) -MM keypad.c
 

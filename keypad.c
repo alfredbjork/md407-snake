@@ -1,3 +1,4 @@
+#include <keypad.h>
 #define GPIO_D_BASE 0x40020C00
 
 void keypad_init(void){

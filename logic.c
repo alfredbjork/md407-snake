@@ -1,70 +1,78 @@
 #include <logic.h>
 
-void set_object_speed(POBJECT o, int speedx, int speedy){
+void set_object_speed(PSNAKE o, int speedx, int speedy){
 	o->dirx = speedx;
 	o->diry = speedy;
 }
 
-void draw_object(POBJECT o){
-	
+void draw_position(int pos, PSNAKE o){
 	unsigned char x;
 	unsigned char y;
 	
-	/*for (int i = 0; i < o->geo->numpoints; i++){
+	// Loop through dots on position
+	for (int j = 0; j < o->body->tile->numpoints; j++){
+		x = (o->body->positions[pos].x * o->body->tile->sizex) - 1 + o->body->tile->px[j].x;
+		y = (o->body->positions[pos].y * o->body->tile->sizey) - 1 + o->body->tile->px[j].y;
 		
-		x = o->posx + o->geo->px[i].x;
-		y = o->posy + o->geo->px[i].y;
-		
+		// Paint it
 		pixel(x, y, 1);
-	}*/
-	for (int i = 0; i < 2; i++){
-		for (int j = 0; j < o->geo->numpoints; j++){
-			
-			x = o->body[i].x + o->geo->px[j].x;
-			y = o->body[i].y + o->geo->px[j].y;
-			
-			pixel(x, y, 1);
-		}
 	}
-		
-		pixel(x, y, 1);
 }
 
-void clear_object(POBJECT o){
+void clear_position(int pos, PSNAKE o){
 	unsigned char x;
 	unsigned char y;
 	
-	for (int i = 0; i < o->geo->numpoints; i++){
+	// Loop through dots on position
+	for (int j = 0; j < o->body->tile->numpoints; j++){
+		x = (o->body->positions[pos].x * o->body->tile->sizex) - 1 + o->body->tile->px[j].x;
+		y = (o->body->positions[pos].y * o->body->tile->sizey) - 1 + o->body->tile->px[j].y;
 		
-		x = o->posx + o->geo->px[i].x;
-		y = o->posy + o->geo->px[i].y;
-		
+		// Paint it
 		pixel(x, y, 0);
 	}
 }
 
-void move_object(POBJECT o){
-	clear_object(o);
+void draw_object(PSNAKE o){
 	
-	// Set new position
-	o->posx += o->dirx;
-	o->posy += o->diry;
+	// Loop through positions
+	for (int i = 0; i < o->body->body_size; i++){
+		draw_position(i, o);
+	}
+}
+
+void clear_object(PSNAKE o){
 	
-	if (o->posx < 1) { // Object is on its way out to the left
-		o->dirx = - o->dirx;
+	// Loop through positions
+	for (int i = 0; i < o->body->body_size; i++){
+		clear_position(i, o);
+	}
+}
+
+void clear_tail(PSNAKE o){
+	
+	// Get tail position
+	int i = o->body->body_size - 1;
+	
+	// Clear tail
+	clear_position(i, o);
+}
+
+void draw_head(PSNAKE o){
+	draw_position(0, o);
+}
+
+void move_object(PSNAKE o){
+	clear_tail(o);
+	
+	// Loop through positions
+	for (int i = o->body->body_size - 1; i > 0; i--){
+		o->body->positions[i] = o->body->positions[i-1];
 	}
 	
-	if (o->posx + o->geo->sizex > 128){ // Object is on its way out to the right
-		o->dirx = - o->dirx;
-	}
+	// Set new head
+	o->body->positions[0].x += o->dirx;
+	o->body->positions[0].y += o->diry;
 	
-	if (o->posy < 1) { // Object is on its way out at the top
-		o->diry = - o->diry;
-	}
-	
-	if (o->posy + o->geo->sizey > 64){ // Object is on its way out at the bottom
-		o->diry = - o->diry;
-	}
-	
-	draw_object(o);
+	draw_head(o);
 }

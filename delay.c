@@ -7,7 +7,7 @@
 #ifdef SIMULATOR
 #define MS_CONSTANT 1
 #else
-#define MS_CONSTANT 1000
+#define MS_CONSTANT 1
 #endif
 
 static char systick_flag;
@@ -29,7 +29,8 @@ void delay_250ns(){
 	*SYSTICK_CTRL = 0;
 	
 	// Load CountValue (250ns = 42 cycles)
-	*SYSTICK_LOAD = 42;
+	//*SYSTICK_LOAD = 42;
+	*SYSTICK_LOAD = 10;
 	
 	// Reset count register
 	*SYSTICK_VAL = 0;
