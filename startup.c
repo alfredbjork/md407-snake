@@ -75,14 +75,26 @@ void main(void){
 		set_object_speed
 	};
 	
+	FOOD food;
+	food.tile = &dot_geometry;
+	food.spawn = spawn_food;
+	food.is_eaten = head_eats_food;
+	
 	// Draw initial snake
 	snake.draw(&snake);
+	
+	food.spawn(&snake, &food);
 	
 	// Gameloop
 	while(snake.is_alive){
 		
 		updateDir(&snake);
 		snake.move(&snake);
+		
+		if (food.is_eaten(&snake, &food)){
+			snake.body->body_size += 1;
+			food.spawn(&snake, &food);
+		}
 	}
 	
 }

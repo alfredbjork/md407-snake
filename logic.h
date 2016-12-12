@@ -40,5 +40,16 @@ void draw_object(PSNAKE);
 void clear_object(PSNAKE);
 void move_object(PSNAKE);
 
+typedef struct tFood{
+	POINT 		position;
+	PGEOMETRY	tile;
+	void 		(* spawn) (struct tObj *, struct tFood *);
+	bool 		(* is_eaten) (struct tObj *, struct tFood *);
+} FOOD, *PFOOD;
+
+void spawn_food(PSNAKE, PFOOD);
+bool snake_eats_food(PSNAKE, PFOOD);
+bool head_eats_food(PSNAKE, PFOOD);
+
 #else
 #endif

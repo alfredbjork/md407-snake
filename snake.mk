@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Alfred Björk
-Date                   :=09/12/2016
+Date                   :=12/12/2016
 CodeLitePath           :="/Users/Alfred/Library/Application Support/codelite"
 LinkerName             :=/Applications/gcc-arm/bin/arm-none-eabi-g++
 SharedObjectLinkerName :=/Applications/gcc-arm/bin/arm-none-eabi-g++ -shared -fPIC
@@ -60,7 +60,7 @@ AS       := /Applications/gcc-arm/bin/arm-none-eabi-as
 ## User defined environment variables
 ##
 CodeLiteDir:=/Applications/codelite.app/Contents/SharedSupport/
-Objects0=$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) $(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/logic.c$(ObjectSuffix) $(IntermediateDirectory)/keypad.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) $(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/logic.c$(ObjectSuffix) $(IntermediateDirectory)/keypad.c$(ObjectSuffix) $(IntermediateDirectory)/random.c$(ObjectSuffix) 
 
 
 
@@ -135,6 +135,14 @@ $(IntermediateDirectory)/keypad.c$(DependSuffix): keypad.c
 
 $(IntermediateDirectory)/keypad.c$(PreprocessSuffix): keypad.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/keypad.c$(PreprocessSuffix)keypad.c
+
+$(IntermediateDirectory)/random.c$(ObjectSuffix): random.c $(IntermediateDirectory)/random.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/Users/Alfred/Box_Sync/Y02_LP2/DAT017/Moplabb/md407-snake/random.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/random.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/random.c$(DependSuffix): random.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/random.c$(ObjectSuffix) -MF$(IntermediateDirectory)/random.c$(DependSuffix) -MM random.c
+
+$(IntermediateDirectory)/random.c$(PreprocessSuffix): random.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/random.c$(PreprocessSuffix)random.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
